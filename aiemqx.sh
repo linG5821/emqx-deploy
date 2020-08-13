@@ -55,10 +55,25 @@ if [[ -z $opt_action ]]; then
 fi
 
 if [ $opt_action == "start" ]; then
+  if [[ -z $opt_name ]]; then
+    echo $show_usage
+    echo "--name is required"
+    exit 0
+  fi
   docker ps -a -f name=$opt_name* -q | xargs docker start
 elif [ $opt_action == "restart" ]; then
+  if [[ -z $opt_name ]]; then
+    echo $show_usage
+    echo "--name is required"
+    exit 0
+  fi
   docker ps -a -f name=$opt_name* -q | xargs docker restart
 elif [ $opt_action == "stop" ]; then
+  if [[ -z $opt_name ]]; then
+    echo $show_usage
+    echo "--name is required"
+    exit 0
+  fi
   docker ps -a -f name=$opt_name* -q | xargs docker stop
 elif [ $opt_action == "deploy" ]; then
   port=1883
@@ -122,6 +137,11 @@ elif [ $opt_action == "deploy" ]; then
     docker run -it --restart=always --network $opt_network --ip $opt_host.254 -p 1883:1883 -p 11883:11883 -p 18083:18083 -p 18084:8080 --name $opt_name-haproxy -d -v /etc/haproxy:/usr/local/etc/haproxy:ro $image_id2
   fi
 elif [ $opt_action == "destroy" ]; then
+  if [[ -z $opt_name ]]; then
+    echo $show_usage
+    echo "--name is required"
+    exit 0
+  fi
   docker ps -a -f name=$opt_name* -q | xargs docker stop | xargs docker rm
 else
   echo "please input sure params"

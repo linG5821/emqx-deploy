@@ -1,6 +1,6 @@
 #!/bin/sh
 #参数
-echo "./aiemqx.sh -a deploy -n 4 -name aidong-prod -i cf2e9945b366 -h 172.17.0"
+echo "./aiemqx.sh -a deploy -n 4 -name aidong-prod -i 905ff9585b3f -h 172.17.0"
 show_usage="[-a, -n, -name, -i, -h, -s, -net] [--action, --number, --name, --image, --host, --skip, --network]"
 GETOPT_ARGS=$(getopt -o a:n:name:i:h:s:net -al action:,number:,name:,image:,host:,skip:,network: -- "$@")
 eval set -- "$GETOPT_ARGS"
