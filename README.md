@@ -1,15 +1,15 @@
 ## 使用说明
 1. 启动
    ```
-    aiemqx.sh -a start -name {name} //用于启动已经被停止的节点
+    aiemqx.sh -a start -name ${name} //用于启动已经被停止的节点
    ```
 2. 停止
    ```
-    aiemqx.sh -a stop -name {name} //用于停止运行中的节点
+    aiemqx.sh -a stop -name ${name} //用于停止运行中的节点
    ```
 3. 重启
    ```
-    aiemqx.sh -a restart -name {name} //用于重启运行中的节点
+    aiemqx.sh -a restart -name ${name} //用于重启运行中的节点
    ```
 4. 部署
    ```
@@ -25,4 +25,5 @@
    ```
 5. 销毁
    ./aiemqx.sh -a destroy --name {name} //用于销毁节点
-6. Normal版本可以试用企业版本
+6. prod版本用于正式环境EMQ部署
+7. MQTT Service 重启 supervisorctl restart mqtt-service:
