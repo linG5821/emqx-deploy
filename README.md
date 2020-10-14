@@ -26,4 +26,4 @@
 5. 销毁
    ./aiemqx.sh -a destroy --name {name} //用于销毁节点
 6. prod版本用于正式环境EMQ部署
-7. MQTT Service 重启 supervisorctl restart mqtt-service:
+7. MQTT Service 重启命令 supervisorctl restart mqtt-service:
