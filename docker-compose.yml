@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 networks:
   emqx-net:
@@ -22,6 +22,7 @@ services:
       retries: 5
     networks:
       emqx-net:
+        # 增加别名是的EMQX HOST可以被访问通,不设置HOST的情况下默认使用节点IP,也可以通过不同的名称相同的HOST实现,但是这样HOST始终不一定是指向节点本身
         aliases:
           - node1.emqx.iot
   emqx2:
