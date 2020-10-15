@@ -1,8 +1,8 @@
 version: "3.8"
 
 networks:
-  emqx-net:
-    driver: ${NETWORKS_DRIVER}
+  emqx_net:
+    driver: overlay
 
 services:
   # EMQX
@@ -21,7 +21,7 @@ services:
       timeout: 25s
       retries: 5
     networks:
-      emqx-net:
+      emqx_net:
         # 增加别名是的EMQX HOST可以被访问通,不设置HOST的情况下默认使用节点IP,也可以通过不同的名称相同的HOST实现,但是这样HOST始终不一定是指向节点本身
         aliases:
           - node1.emqx.iot
@@ -40,7 +40,7 @@ services:
       timeout: 25s
       retries: 5
     networks:
-      emqx-net:
+      emqx_net:
         aliases:
           - node2.emqx.iot
   emqx3:
@@ -58,7 +58,7 @@ services:
       timeout: 25s
       retries: 5
     networks:
-      emqx-net:
+      emqx_net:
         aliases:
           - node3.emqx.iot
   emqx4:
@@ -76,7 +76,7 @@ services:
       timeout: 25s
       retries: 5
     networks:
-      emqx-net:
+      emqx_net:
         aliases:
           - node4.emqx.iot
   # Haproxy
@@ -85,7 +85,7 @@ services:
     volumes: 
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     networks: 
-      - emqx-net
+      - emqx_net
     depends_on:
       - emqx1
       - emqx2
