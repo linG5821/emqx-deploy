@@ -2,7 +2,8 @@ version: "3.8"
 
 networks:
   one_full_net:
-    driver: overlay
+    external:
+      name: one_full_net
 
 services:
   # EMQX
