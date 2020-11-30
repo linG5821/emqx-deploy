@@ -4,4 +4,3 @@
 {emqx_dashboard, true}.
 {emqx_rule_engine, true}.
 {emqx_bridge_mqtt, false}.
-{emqx_delayed_publish, true}.
