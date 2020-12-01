@@ -1,4 +1,31 @@
-## 使用说明
+## docker-compose部署
+1. 创建overlay网络
+   ```
+   docker network create --attachable -d overlay one_full_net --subnet=10.10.0.0/16
+   ```
+2. 启动
+   ```
+   # 当前目录执行 指定-d 参数后台启动
+   docker-compose up -d
+   ```
+3. 停止
+   ```
+   docker-compose stop
+   ```
+4. 更新
+   ```
+   docker-compose up
+   ```
+5. 重启
+   ```
+   docker-compose restart
+   ```
+6. 删除
+   ```
+   docker-compose rm
+   ```
+
+## 脚本部署使用说明(不推荐)
 1. 启动
    ```
     aiemqx.sh -a start -name ${name} //用于启动已经被停止的节点
