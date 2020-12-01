@@ -20,6 +20,7 @@ services:
       - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
       - ./acl.conf:/opt/emqx/etc/acl.conf
       - ./loaded_plugins:/opt/emqx/data/loaded_plugins
+      - ./loaded_modules:/opt/emqx/data/loaded_modules
     healthcheck:
       test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
       interval: 5s
