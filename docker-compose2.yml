@@ -1,0 +1,58 @@
+version: "3.8"
+
+networks:
+  one_full_net:
+    external:
+      name: one_full_net
+
+services:
+  emqx3:
+    image: emqx/emqx:${EMQX_VERSION}
+    restart: always
+    environment:
+      - EMQX_NAME=emqx
+      - EMQX_HOST=node3.emqx.iot
+      - EMQX_CLUSTER__DISCOVERY=static
+      - EMQX_CLUSTER__STATIC__SEEDS=emqx@node1.emqx.iot,emqx@node2.emqx.iot,emqx@node3.emqx.iot,emqx@node4.emqx.iot
+      - EMQX_LISTENER__TCP__INTERNAL=0.0.0.0:11883
+    volumes: 
+      - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf 
+      - ./acl.conf:/opt/emqx/etc/acl.conf
+      - ./loaded_plugins:/opt/emqx/data/loaded_plugins
+      - ./loaded_modules:/opt/emqx/data/loaded_modules
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    networks:
+      one_full_net:
+        aliases:
+          - node3.emqx.iot
+  emqx4:
+    image: emqx/emqx:${EMQX_VERSION}
+    restart: always
+    environment:
+      - EMQX_NAME=emqx
+      - EMQX_HOST=node4.emqx.iot
+      - EMQX_CLUSTER__DISCOVERY=static
+      - EMQX_CLUSTER__STATIC__SEEDS=emqx@node1.emqx.iot,emqx@node2.emqx.iot,emqx@node3.emqx.iot,emqx@node4.emqx.iot
+      - EMQX_LISTENER__TCP__INTERNAL=0.0.0.0:11883
+    volumes: 
+      - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
+      - ./acl.conf:/opt/emqx/etc/acl.conf
+      - ./loaded_plugins:/opt/emqx/data/loaded_plugins
+      - ./loaded_modules:/opt/emqx/data/loaded_modules
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    networks:
+      one_full_net:
+        aliases:
+          - node4.emqx.iot
+
+    
+
+    
