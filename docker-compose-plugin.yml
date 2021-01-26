@@ -24,6 +24,7 @@ services:
       - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
       - ./acl.conf:/opt/emqx/etc/acl.conf
       - ./emqx_extension_hook.conf:/opt/emqx/etc/plugins/emqx_extension_hook.conf
+      - ./emqx_exproto.conf:/opt/emqx/etc/plugins/emqx_exproto.conf
       - ./loaded_plugins:/opt/emqx/data/loaded_plugins
       - ./loaded_modules:/opt/emqx/data/loaded_modules
       - ./extension/:/opt/emqx/data/extension/
@@ -53,6 +54,8 @@ services:
       - ${EMQX_INTERNAL_PORT}:11883
       - ${EMQX_DASHBOARD_PORT}:18083
       - ${HAPROXY_ADMIN_PORT}:8080
+      - 7993:7993
+      - 7994:7994
 
     
 

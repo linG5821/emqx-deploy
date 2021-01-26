@@ -4,3 +4,4 @@ emqx_retainer.
 emqx_dashboard.
 emqx_rule_engine.
 {emqx_extension_hook,true}.
+{emqx_exproto, true}.
