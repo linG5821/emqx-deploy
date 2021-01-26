@@ -1,0 +1,59 @@
+version: "3.8"
+
+networks:
+  one_full_net:
+    external:
+      name: one_full_net
+
+services:
+  # EMQX
+  emqx1:
+    build:
+      context: ./emqx 
+      args:
+          - EMQX_VERSION=${EMQX_VERSION}
+    restart: always
+
+    environment:
+      - EMQX_NAME=emqx
+      - EMQX_HOST=node1.emqx.iot
+      - EMQX_CLUSTER__DISCOVERY=static
+      - EMQX_CLUSTER__STATIC__SEEDS=emqx@node1.emqx.iot,emqx@node2.emqx.iot,emqx@node3.emqx.iot,emqx@node4.emqx.iot
+      - EMQX_LISTENER__TCP__INTERNAL=0.0.0.0:11883
+    volumes: 
+      - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
+      - ./acl.conf:/opt/emqx/etc/acl.conf
+      - ./emqx_extension_hook.conf:/opt/emqx/etc/plugins/emqx_extension_hook.conf
+      - ./loaded_plugins:/opt/emqx/data/loaded_plugins
+      - ./loaded_modules:/opt/emqx/data/loaded_modules
+      - ./extension/:/opt/emqx/data/extension/
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    networks:
+      one_full_net:
+        # 增加别名是的EMQX HOST可以被访问通,不设置HOST的情况下默认使用节点IP,也可以通过不同的名称相同的HOST实现,但是这样HOST始终不一定是指向节点本身
+        aliases:
+          - node1.emqx.iot
+  # Haproxy
+  haproxy:
+    image: haproxy:${HAPROXY_VERSION}
+    volumes: 
+      - ./haproxy/haproxy-plugin.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks: 
+      one_full_net: 
+        aliases: 
+          - iot-server.mqtt
+    depends_on:
+      - emqx1
+    ports:
+      - ${EMQX_TCP_PORT}:1883
+      - ${EMQX_INTERNAL_PORT}:11883
+      - ${EMQX_DASHBOARD_PORT}:18083
+      - ${HAPROXY_ADMIN_PORT}:8080
+
+    
+
+    
