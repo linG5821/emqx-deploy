@@ -77,7 +77,7 @@ services:
           - node2.emqx.iot
   # Haproxy
   haproxy:
-    image: haproxy:${HAPROXY_VERSION}
+    image: haproxy:2.3.4
     volumes: 
       - ./haproxy/haproxy-plugin.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
       - ./haproxy/cert.pem:/etc/ssl/emqx/emq.pem
