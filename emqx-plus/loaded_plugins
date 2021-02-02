@@ -7,3 +7,4 @@
 {emqx_auth_mysql, true}.
 {emqx_extension_hook, false}.
 {emqx_exproto, true}.
+{emqx_telemetry, true}.
