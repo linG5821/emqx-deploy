@@ -20,6 +20,7 @@ services:
       - EMQX_CLUSTER__DISCOVERY=static
       - EMQX_CLUSTER__STATIC__SEEDS=emqx@node1.emqx.iot,emqx@node2.emqx.iot,emqx@node3.emqx.iot,emqx@node4.emqx.iot
       - EMQX_LISTENER__TCP__INTERNAL=0.0.0.0:11883
+      - EMQX_LOG__LEVEL=info
       - EMQX_ALLOW__ANONYMOUS=false
     volumes: 
       - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
@@ -53,6 +54,7 @@ services:
       - EMQX_CLUSTER__DISCOVERY=static
       - EMQX_CLUSTER__STATIC__SEEDS=emqx@node1.emqx.iot,emqx@node2.emqx.iot,emqx@node3.emqx.iot,emqx@node4.emqx.iot
       - EMQX_LISTENER__TCP__INTERNAL=0.0.0.0:11883
+      - EMQX_LOG__LEVEL=info
       - EMQX_ALLOW__ANONYMOUS=false
     volumes: 
       - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
