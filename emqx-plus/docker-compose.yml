@@ -23,6 +23,8 @@ services:
       - EMQX_LOG__LEVEL=info
       - EMQX_ALLOW__ANONYMOUS=false
       - EMQX_ALLOW_ANONYMOUS=false
+      - EMQX_ACL_NOMATCH=deny
+      - EMQX_ACL_DENY_ACTION=disconnect
     volumes: 
       - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
       - ./acl.conf:/opt/emqx/etc/acl.conf
@@ -58,6 +60,8 @@ services:
       - EMQX_LOG__LEVEL=info
       - EMQX_ALLOW__ANONYMOUS=false
       - EMQX_ALLOW_ANONYMOUS=false
+      - EMQX_ACL_NOMATCH=deny
+      - EMQX_ACL_DENY_ACTION=disconnect
     volumes: 
       - ./emqx_dashboard.conf:/opt/emqx/etc/plugins/emqx_dashboard.conf
       - ./acl.conf:/opt/emqx/etc/acl.conf
